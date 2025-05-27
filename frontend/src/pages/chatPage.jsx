@@ -36,7 +36,7 @@ const ChatPage = () => {
     const [editError, setEditError] = useState(null); // Error spesifik untuk modal edit
     const [editSuccess, setEditSuccess] = useState(null); // Sukses spesifik untuk modal edit
 
-    console.log("accessToken dari context:", accessToken);
+    // console.log("accessToken dari context:", accessToken);
     // const token = localStorage.getItem('token');
     // 1. Get User Data
     useEffect(() => {
