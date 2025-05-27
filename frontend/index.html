@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Documentation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    .container {
+      padding: 20px;
+    }
+    h1, h2 {
+      color: #333;
+    }
+    code {
+      background-color: #f1f1f1;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+    pre {
+      background-color: #f1f1f1;
+      padding: 10px;
+      border-radius: 5px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    .endpoint {
+      margin-bottom: 20px;
+    }
+    .endpoint h3 {
+      margin-bottom: 10px;
+      color: #333;
+    }
+    .endpoint p {
+      font-size: 16px;
+    }
+    .response {
+      background-color: #e9e9e9;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .request-body, .response-body {
+      background-color: #f9f9f9;
+      padding: 10px;
+      border-radius: 5px;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>API Documentation</h1>
+    <p>Documentation for User, Contact, and Chat API</p>
+  </header>
+
+  <div class="container">
+    <!-- USERCONTROLLER API -->
+    <section class="endpoint">
+      <h2>UserController API</h2>
+
+      <!-- Register -->
+      <div class="endpoint">
+        <h3>1. Register</h3>
+        <p><strong>Endpoint:</strong> <code>POST /api/register</code></p>
+        <p><strong>Description:</strong> Register a new user with username, email, nickname, and password.</p>
+        <div class="request-body">
+          <h4>Request Body:</h4>
+          <pre>
+{
+  "username": "string",
+  "password": "string",
+  "email": "string",
+  "nickname": "string"
+}
+          </pre>
+        </div>
+        <div class="response-body">
+          <h4>Response:</h4>
+          <p><strong>Status 201:</strong></p>
+          <pre>
+{
+  "message": "Registrasi berhasil",
+  "user": {
+    "id_user": "int",
+    "username": "string",
+    "email": "string",
+    "nickname": "string"
+  }
+}
+          </pre>
+        </div>
+      </div>
+
+      <!-- Login -->
+      <div class="endpoint">
+        <h3>2. Login</h3>
+        <p><strong>Endpoint:</strong> <code>POST /api/login</code></p>
+        <p><strong>Description:</strong> Login a user with username and password to get an access token.</p>
+        <div class="request-body">
+          <h4>Request Body:</h4>
+          <pre>
+{
+  "username": "string",
+  "password": "string"
+}
+          </pre>
+        </div>
+        <div class="response-body">
+          <h4>Response:</h4>
+          <p><strong>Status 200:</strong></p>
+          <pre>
+{
+  "message": "Login berhasil",
+  "accessToken": "string",
+  "user": {
+    "id_user": "int",
+    "username": "string",
+    "email": "string",
+    "nickname": "string"
+  }
+}
+          </pre>
+        </div>
+      </div>
+
+      <!-- Refresh Token -->
+      <div class="endpoint">
+        <h3>3. Refresh Token</h3>
+        <p><strong>Endpoint:</strong> <code>POST /api/refresh-token</code></p>
+        <p><strong>Description:</strong> Get a new access token using a valid refresh token.</p>
+        <div class="response-body">
+          <h4>Response:</h4>
+          <p><strong>Status 200:</strong></p>
+          <pre>
+{
+  "accessToken": "string"
+}
+          </pre>
+        </div>
+      </div>
+
+      <!-- Logout -->
+      <div class="endpoint">
+        <h3>4. Logout</h3>
+        <p><strong>Endpoint:</strong> <code>POST /api/logout</code></p>
+        <p><strong>Description:</strong> Logout a user and clear the refresh token.</p>
+        <div class="response-body">
+          <h4>Response:</h4>
+          <p><strong>Status 200:</strong></p>
+          <pre>
+{
+  "message": "Logout berhasil"
+}
+          </pre>
+        </div>
+      </div>
+
+      <!-- Update User -->
+      <div class="endpoint">
+        <h3>5. Update User</h3>
+        <p><strong>Endpoint:</strong> <code>PUT /api/user/:id</code></p>
+        <p><strong>Description:</strong> Update user information such as username, email, nickname, or password.</p>
+        <div class="request-body">
+          <h4>Request Body:</h4>
+          <pre>
+{
+  "username": "string",
+  "email": "string",
+  "nickname": "string",
+  "password": "string"
+}
+          </pre>
+        </div>
+        <div class="response-body">
+          <h4>Response:</h4>
+          <p><strong>Status 200:</strong></p>
+          <pre>
+{
+  "message": "User berhasil diperbarui"
+}
+          </pre>
+        </div>
+      </div>
+
+      <!-- Delete User -->
+      <div class="endpoint">
+        <h3>6. Delete User</h3>
+        <p><strong>Endpoint:</strong> <code>DELETE /api/user/:id</code></p>
+        <p><strong>Description:</strong> Delete a user based on the given ID.</p>
+        <div class="response-body">
+          <h4>Response:</h4>
+          <p><strong>Status 200:</strong></p>
+          <pre>
+{
+  "message": "User berhasil dihapus"
+}
+          </pre>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- CONTACTCONTROLLER API -->
+    <section class="endpoint">
+      <h2>ContactController API</h2>
+      <!-- Repeat similar structure for contact controller APIs... -->
+    </section>
+
+    <!-- CHATCONTROLLER API -->
+    <section class="endpoint">
+      <h2>ChatController API</h2>
+      <!-- Repeat similar structure for chat controller APIs... -->
+    </section>
+
+  </div>
+
+</body>
+</html>
