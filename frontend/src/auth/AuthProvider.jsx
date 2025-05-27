@@ -9,18 +9,16 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [accessToken, setAccessToken] = useState(() => localStorage.getItem("token") || null);
-  // Tambahkan state untuk user
-  const [user, setUser] = useState(() => {
+  const [user, setUser] = useState(() => {
       const userData = sessionStorage.getItem('userData');
       return userData ? JSON.parse(userData) : null;
   });
 
-// Fungsi BARU untuk mengatur state setelah login
   const setAuthState = (newAccessToken, newUser, newRefreshToken) => {
-      setAccessToken(newAccessToken); // <<< PENTING: Update state context
-      setUser(newUser);             // <<< PENTING: Update state context
+      setAccessToken(newAccessToken); 
+      setUser(newUser);             
       localStorage.setItem("token", newAccessToken);
-      sessionStorage.setItem('userData', JSON.stringify(newUser)); // Simpan user data
+      sessionStorage.setItem('userData', JSON.stringify(newUser));
 
       if (newRefreshToken) {
           Cookies.set("refreshToken", newRefreshToken, {
@@ -39,7 +37,6 @@ export const AuthProvider = ({ children }) => {
       setAccessToken(token);
       localStorage.setItem("token", token);
 
-      // Simpan refresh token di cookie (default 1 hari)
       Cookies.set("refreshToken", res.data.refreshToken, {
         secure: true,
         sameSite: "Strict",
@@ -55,7 +52,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     setAccessToken(null);
-    setUser(null); // Reset user state
+    setUser(null); 
     localStorage.removeItem("token");
     sessionStorage.removeItem("userData");
     Cookies.remove("refreshToken");

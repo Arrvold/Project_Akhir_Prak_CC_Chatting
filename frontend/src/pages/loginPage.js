@@ -8,7 +8,7 @@ const LoginPage = () => {
   const [searchParams] = useSearchParams();
   const info = searchParams.get("info");
   const navigate = useNavigate();
-  const { setAuthState } = useAuth(); // <<< Dapatkan fungsi setAuthState
+  const { setAuthState } = useAuth(); 
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -27,14 +27,12 @@ const LoginPage = () => {
 
       const { accessToken, user, refreshToken } = response.data;
 
-      // ✅ Simpan accessToken & user
       // localStorage.setItem('token', accessToken); // token for Authorization header
       // sessionStorage.setItem('userData', JSON.stringify(user)); // user for app logic
       setAuthState(accessToken, user, refreshToken);
 
       setMsg('Login berhasil!');
 
-      // ✅ Redirect ke ChatPage
       navigate('/chat');
     } catch (error) {
       setMsg(error.response?.data?.message || 'Username/Password salah');
@@ -65,7 +63,7 @@ const LoginPage = () => {
     }}>
       <div className="container">
         <div className="row justify-content-center">
-          {/* Left Side - Carousel */}
+          {/* Left Side Carousel */}
           <div className="col-lg-6 d-none d-lg-block">
             <div className="h-100 d-flex align-items-center">
               <div id="carouselExampleSlidesOnly" className="carousel slide w-100" data-bs-ride="carousel">
@@ -84,7 +82,7 @@ const LoginPage = () => {
             </div>
           </div>
 
-          {/* Right Side - Login Form */}
+          {/* Right Side Login Form */}
           <div className="col-lg-6 col-md-8 col-sm-10">
             <div className="d-flex justify-content-center align-items-center min-vh-100 py-4">
               <div className="login-card w-100" style={{ maxWidth: '450px' }}>
