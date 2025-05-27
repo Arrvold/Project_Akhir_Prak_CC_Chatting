@@ -20,7 +20,7 @@ app.use(cookieParser());
 
 // Middleware
 // app.use(cors({ origin: "https://projek-akhir-072-096-dot-f-07-450706.uc.r.appspot.com" }));
-app.use(cors({ origin: "http://localhost:3000" }));
+app.use(cors({ origin: "https://projek-akhir-072-096-dot-f-07-450706.uc.r.appspot.com" }));
 app.use(express.json());
 
 // Routing
