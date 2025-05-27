@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize";
 import db from "../config/database.js";
-import User from "./usermodel.js"; // <-- 1. Impor User Model
+import User from "./usermodel.js"; 
 
 const { DataTypes } = Sequelize;
 
@@ -13,22 +13,22 @@ const Contact = db.define("Contact", {
     id_useradder: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        references: {        // <-- 2. Tambahkan 'references'
-            model: User,       //    - Merujuk ke tabel/model 'User'
-            key: 'id_user'     //    - Merujuk ke kolom 'id_user' di 'User'
+        references: {       
+            model: User,     
+            key: 'id_user'     
         },
-        onDelete: 'CASCADE',   // <-- 3. Tambahkan 'onDelete'
-        onUpdate: 'CASCADE'    // <-- 4. Tambahkan 'onUpdate'
+        onDelete: 'CASCADE',   
+        onUpdate: 'CASCADE'    
     },
     id_userreceiver: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        references: {        // <-- 2. Tambahkan 'references'
-            model: User,       //    - Merujuk ke tabel/model 'User'
-            key: 'id_user'     //    - Merujuk ke kolom 'id_user' di 'User'
+        references: {       
+            model: User,       
+            key: 'id_user'     
         },
-        onDelete: 'CASCADE',   // <-- 3. Tambahkan 'onDelete'
-        onUpdate: 'CASCADE'    // <-- 4. Tambahkan 'onUpdate'
+        onDelete: 'CASCADE', 
+        onUpdate: 'CASCADE' 
     },
     nickname: {
         type: DataTypes.STRING

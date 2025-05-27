@@ -13,22 +13,22 @@ const Chat = db.define("Chat", {
     id_sender: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        references: {          // <-- 2. Tambahkan 'references'
-            model: User,       //    - Merujuk ke tabel/model 'User'
-            key: 'id_user'     //    - Merujuk ke kolom 'id_user' di 'User'
+        references: {        
+            model: User,       
+            key: 'id_user'     
         },
-        onDelete: 'CASCADE',   // <-- 3. Tambahkan 'onDelete'
-        onUpdate: 'CASCADE'    // <-- 4. Tambahkan 'onUpdate' (praktik baik)
+        onDelete: 'CASCADE', 
+        onUpdate: 'CASCADE'   
     },
     id_receiver: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        references: {          // <-- 2. Tambahkan 'references'
-            model: User,       //    - Merujuk ke tabel/model 'User'
-            key: 'id_user'     //    - Merujuk ke kolom 'id_user' di 'User'
+        references: {         
+            model: User,    
+            key: 'id_user'    
         },
-        onDelete: 'CASCADE',   // <-- 3. Tambahkan 'onDelete'
-        onUpdate: 'CASCADE'    // <-- 4. Tambahkan 'onUpdate' (praktik baik)
+        onDelete: 'CASCADE',  
+        onUpdate: 'CASCADE'   
     },
     message: {
         type: DataTypes.TEXT,
@@ -36,7 +36,7 @@ const Chat = db.define("Chat", {
     },
     timestamp: {
         type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW // Anda bisa juga menggunakan Sequelize.NOW
+        defaultValue: DataTypes.NOW 
     }
 }, {
     freezeTableName: true,
