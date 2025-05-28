@@ -45,7 +45,7 @@ const Register = () => {
     }}>
       <div className="container">
         <div className="row justify-content-center">
-          {/* Left Side - Carousel */}
+          {/* Left Side Carousel */}
           <div className="col-lg-6 d-none d-lg-block">
             <div className="h-100 d-flex align-items-center">
               <div id="carouselExampleSlidesOnly" className="carousel slide w-100" data-bs-ride="carousel">
@@ -64,7 +64,7 @@ const Register = () => {
             </div>
           </div>
 
-          {/* Right Side - Register Form */}
+          {/* Right Side Register Form */}
           <div className="col-lg-6 col-md-8 col-sm-10">
             <div className="d-flex justify-content-center align-items-center min-vh-100 py-4">
               <div className="register-card w-100" style={{ maxWidth: '500px' }}>

@@ -4,9 +4,7 @@ import axios from 'axios';
 import { BASE_URL } from "../utils";
 import '../components/chatPage.css';
 import useAuth from '../auth/useAuth';
-// Impor Bootstrap JS dan CSS jika belum ada (atau pastikan sudah di-load global)
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import Modal from 'react-bootstrap/Modal'; // Atau gunakan modal custom / library lain
+
 
 const ChatPage = () => {
     const { accessToken, refreshAccessToken } = useAuth();
@@ -18,7 +16,7 @@ const ChatPage = () => {
     const [newContactUsername, setNewContactUsername] = useState('');
     const [newContactNickname, setNewContactNickname] = useState('');
     const [currentUser, setCurrentUser] = useState(null);
-    const [error, setError] = useState(null); // General error
+    const [error, setError] = useState(null);
     const [editingMessageId, setEditingMessageId] = useState(null);
     const [editingText, setEditingText] = useState('');
     const [editingContactId, setEditingContactId] = useState(null);
@@ -30,14 +28,13 @@ const ChatPage = () => {
     const [editUsername, setEditUsername] = useState('');
     const [editEmail, setEditEmail] = useState('');
     const [editNickname, setEditNickname] = useState('');
-    const [currentPassword, setCurrentPassword] = useState(''); // Untuk verifikasi (jika backend mendukung)
+    const [currentPassword, setCurrentPassword] = useState(''); 
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [editError, setEditError] = useState(null); // Error spesifik untuk modal edit
-    const [editSuccess, setEditSuccess] = useState(null); // Sukses spesifik untuk modal edit
+    const [editError, setEditError] = useState(null); 
+    const [editSuccess, setEditSuccess] = useState(null); 
 
-    // console.log("accessToken dari context:", accessToken);
-    // const token = localStorage.getItem('token');
+
     // 1. Get User Data
     useEffect(() => {
         const rawData = sessionStorage.getItem('userData');
@@ -60,7 +57,7 @@ const ChatPage = () => {
         }
     }, [navigate]);
 
-    // 2. Fetch Contacts (Tetap sama)
+    // 2. Fetch Contacts 
     const fetchContacts = useCallback(async () => {
         if (!currentUser || !accessToken) return;
         try {
@@ -83,7 +80,7 @@ const ChatPage = () => {
         fetchContacts();
     }, [fetchContacts]);
 
-    // 3. Fetch Messages (Tetap sama)
+    // 3. Fetch Messages 
     const fetchMessages = useCallback(async () => {
         if (!contactId || contactId === 'undefined' || !currentUser || !accessToken) {
             return;
@@ -110,7 +107,7 @@ const ChatPage = () => {
         }
     }, [contactId, currentUser, accessToken, navigate]);
 
-    // 4. useEffect for Fetch Messages & Polling (Tetap sama)
+    // 4. useEffect untuk Fetch Messages & Polling 
     useEffect(() => {
         if (!contactId || contactId === 'undefined' || !currentUser) {
             setMessages([]);
@@ -122,7 +119,7 @@ const ChatPage = () => {
     }, [contactId, currentUser, fetchMessages]);
 
 
-    // 5. Auto-Scroll (Tetap sama)
+    // 5. Auto-Scroll 
     useEffect(() => {
         if (!editingMessageId) {
             messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -130,13 +127,13 @@ const ChatPage = () => {
     }, [messages, editingMessageId]);
 
     useEffect(() => {
-        // Hanya jalankan jika contactId ada DAN daftar contacts sudah dimuat
+        
         if (contactId && contactId !== 'undefined' && contacts.length > 0) {
             const isContactStillValid = contacts.some(
                 contact => contact.user && String(contact.user.id_user) === contactId
             );
 
-            // Jika TIDAK valid (tidak ditemukan di daftar)
+            
             if (!isContactStillValid) {
                 console.warn(`Kontak ${contactId} tidak lagi valid di frontend. Navigasi kembali.`);
                 alert("Kontak yang Anda pilih tidak lagi tersedia.");
@@ -145,7 +142,7 @@ const ChatPage = () => {
         }
     }, [contactId, contacts, navigate]);
 
-    // 6. Handle Send Message (Tetap sama)
+    // 6. Handle Send Message 
     const handleSendMessage = async (e) => {
         e.preventDefault();
         if (!newMessage.trim() || !contactId || contactId === 'undefined' || !currentUser) return;
@@ -169,7 +166,7 @@ const ChatPage = () => {
     };
 
 
-    // 7. Handle Add Contact (Tetap sama)
+    // 7. Handle Add Contact 
     const handleAddContact = async () => {
         if (!newContactUsername.trim()) {
             alert('Username kontak tidak boleh kosong');
@@ -204,14 +201,14 @@ const ChatPage = () => {
     };
 
 
-    // 8. Handle Logout (Tetap sama, akan digunakan saat delete)
+    // 8. Handle Logout 
     const handleLogout = () => {
         sessionStorage.removeItem('userData');
-        localStorage.removeItem('token'); // Hapus token jika ada
+        localStorage.removeItem('token'); 
         navigate('/');
     };
 
-    // 9. Handle Contact Click (Tetap sama)
+    // 9. Handle Contact Click 
     const handleContactClick = (targetId) => {
         if (targetId === undefined || targetId === null) {
             console.error("GAGAL NAVIGASI: targetId undefined/null.");
@@ -224,14 +221,14 @@ const ChatPage = () => {
     };
 
 
-    // 10. Get Contact Display Name (Tetap sama)
+    // 10. Get Contact Display Name 
     const getContactDisplayName = (contact) => {
         if (!contact || !contact.user) return 'Unknown';
         return contact.nickname || contact.user.username || 'Unknown';
     };
 
 
-    // 11. Edit/Delete Message Handlers (Tetap sama)
+    // 11. Edit/Delete Message Handlers 
     const handleEditClick = (message) => {
         setEditingMessageId(message.id_chat);
         setEditingText(message.message);
@@ -278,7 +275,7 @@ const ChatPage = () => {
     };
 
 
-    // 12. Edit/Delete Contact Handlers (Tetap sama)
+    // 12. Edit/Delete Contact Handlers 
     const handleContactEditClick = (contact) => {
         setEditingContactId(contact.id_contact);
         setEditingContactNickname(contact.nickname || contact.user.username);
@@ -332,7 +329,7 @@ const ChatPage = () => {
     };
 
 
-    // --- 13. Fungsi untuk Edit Profil & Ganti Password ---
+    // 13. Fungsi Edit Profil & Ganti Password
     const handleOpenEditModal = () => {
         setEditError(null);
         setEditSuccess(null);
@@ -408,9 +405,9 @@ const ChatPage = () => {
         }
     };
 
-    // --- 14. Fungsi BARU untuk Hapus User ---
+    //14. Fungsi untuk Hapus User
     const handleDeleteUser = async () => {
-        setEditError(null); // Reset error
+        setEditError(null); 
         const confirmDelete = window.confirm(
             "APAKAH ANDA YAKIN INGIN MENGHAPUS AKUN ANDA? \n\nTindakan ini tidak dapat dibatalkan dan semua data Anda (kontak, chat) akan hilang secara permanen."
         );
@@ -423,11 +420,11 @@ const ChatPage = () => {
                     }
                 });
                 alert("Akun Anda telah berhasil dihapus.");
-                handleLogout(); // Logout dan redirect
+                handleLogout(); 
             } catch (err) {
                 console.error('Error deleting user:', err);
                 setEditError(err.response?.data?.msg || 'Gagal menghapus akun.');
-                alert('Gagal menghapus akun. Silakan coba lagi.'); // Beri alert juga
+                alert('Gagal menghapus akun. Silakan coba lagi.'); 
             }
         }
     };
@@ -436,11 +433,11 @@ const ChatPage = () => {
     // 15. Loading State
     if (!currentUser) return <div>Loading...</div>;
 
-    // --- JSX ---
+    
     return (
         <div className="chat-container">
             <div className="row h-100 m-0">
-                {/* Sidebar dengan desain modern */}
+                {/* Sidebar */}
                 <div className="col-3 chat-sidebar p-3 d-flex flex-column">
                     <div className="chat-sidebar-header">
                         <img src="/logoo.png" alt="Logo" />
@@ -495,7 +492,7 @@ const ChatPage = () => {
                         })}
                     </div>
 
-                    {/* Add Contact Section - Tanpa tombol Files dan Images */}
+                    {/* Add Contact Section */}
                     <div className="add-contact mt-3">
                         <div className="input-group mb-2">
                             <input
@@ -524,13 +521,13 @@ const ChatPage = () => {
                         </button>
                     </div>
 
-                    {/* Logout Button - Files dan Images dihapus */}
+                    {/* Logout Button */}
                     <button className="btn btn-danger mt-3" onClick={handleLogout}>
                         Logout
                     </button>
                 </div>
 
-                {/* Chat Content dengan desain modern */}
+                {/* Chat Content */}
                 <div className="col chat-content">
                     <div className="d-flex flex-column h-100">
                         <div className="chat-messages flex-grow-1 overflow-auto p-3">
@@ -610,7 +607,7 @@ const ChatPage = () => {
                             <div ref={messagesEndRef} />
                         </div>
 
-                        {/* Message Input dengan desain modern */}
+                        {/* Message Input */}
                         {contactId && contactId !== 'undefined' && (
                             <div className="chat-input mt-auto p-3">
                                 <form onSubmit={handleSendMessage} className="d-flex">
@@ -639,7 +636,7 @@ const ChatPage = () => {
                 </div>
             </div>
 
-            {/* Modal Edit Profile dengan styling modern */}
+            {/* Modal Edit Profile */}
             {showEditProfileModal && (
                 <div className="modal show" style={{ display: 'block' }} tabIndex="-1">
                     <div className="modal-dialog">
