@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
           Cookies.set("refreshToken", newRefreshToken, {
               secure: true,
               sameSite: "Strict",
-              expires: 5,
+              expires: 1,
           });
       }
   };
@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }) => {
       Cookies.set("refreshToken", res.data.refreshToken, {
         secure: true,
         sameSite: "Strict",
-        expires: 5,
+        expires: 1,
       });
 
       return true;
